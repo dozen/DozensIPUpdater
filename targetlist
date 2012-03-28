@@ -1,0 +1,7 @@
+//ゾーン名 : ドメイン名というように入力してください。
+//例
+//hoge.jp : hoge.jp
+//hoge.jp : www.hoge.jp
+//foo.jp  : foo.jp
+//foo.jp  : www.foo.jp
+foo.jp  : www.foo.jp
