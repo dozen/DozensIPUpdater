@@ -39,7 +39,7 @@ class MyIPAdress {
   function changedMyIPAdress() {
     if (Config::USEMEMCACHED) {
       $this->mem = new Memcache();
-      $this->mem->pconnect(Config::MEMCACHEDHOST, Config::MEMCACHEDPORT);
+      $this->mem->connect(Config::MEMCACHEDHOST, Config::MEMCACHEDPORT);
       if ($this->ip == $this->mem->get('dozens_MyIPAdress')) {
         return false;
       }
@@ -129,8 +129,9 @@ class Curl {
   }
 
   public function result() {
-    return json_decode(curl_exec($this->ch));
+    $result = json_decode(curl_exec($this->ch));
     curl_close($this->ch);
+    return $result;
   }
 
 }

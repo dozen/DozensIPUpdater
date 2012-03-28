@@ -1,0 +1,32 @@
+h3. DozensIPUpdater
+
+Dozens.jpを動的IPアドレスで利用していてIPアドレスが変動した場合自動的にIPアドレスを更新したい場合に用います。
+
+h3. 使い方
+
+dozens.phpの5行目にユーザ名を、6行目にAPIキーを入力してください。APIキーはdozens.jpの"プロフィール画面":https://dozens.jp/profile で確認できます。
+
+bq. const ID = 'dozen';
+const XAUTHKEY = 'cafiojafoiej610353e1bebad8';
+
+次に、変更があった時に更新したいドメイン名をtargetlistファイルに入力してください。ゾーン名:ドメイン名というように入力してください。
+
+bq. hoge.jp : hoge.jp
+hoge.jp : www.hoge.jp
+foo.jp  : foo.jp
+foo.jp  : www.foo.jp
+
+myipadressファイルにIPアドレスを保持するため、読み書きができるようにしてください。
+IPアドレスの保持にファイルを使わず、Memcachedを使うこともできます。その場合、dozens.phpの8行目の値をtrueにし、9行目、10行目にそれぞれMemcachedのホスト名とポートを入力してください。
+
+bq. const USEMEMCACHED = false;
+const MEMCACHEDHOST = 'localhost';
+const MEMCACHEDPORT = 11211;
+
+以上の設定を終えたら、dozens.phpを2度実行してください。エラーが出なければうまく行っていると思います。何かしらのエラーが出る場合、設定が間違っているかPHPのパッケージが足りないのかもしれません。問題が解決しない場合 @"_dozen_":https://twitter.com/#!/_dozen_ にご連絡ください。
+エラーが出ないことを確認したらcronで定期実行してください。IPアドレスの変動がなかった場合、dozens.jpのAPIにはアクセスしませんので10分ごとなど短い間隔でも大丈夫だと思います。
+
+h3. 必要なプラグイン
+
+cURLを利用しているのでPHPからcURLを利用するためのパッケージが必要です。
+Memcachedを利用する場合、 "memcacheパッケージ":http://jp2.php.net/manual/ja/memcache.installation.php もインストールする必要があります。
