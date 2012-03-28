@@ -8,7 +8,7 @@
   <style type="text/css">
     body {
       margin-top: 1.0em;
-      background-color: #815579;
+      background-color: #d3a243;
       font-family: Helvetica, Arial, FreeSans, san-serif;
       color: #ffffff;
     }
@@ -16,12 +16,12 @@
       margin: 0 auto;
       width: 700px;
     }
-    h1 { font-size: 3.8em; color: #7eaa86; margin-bottom: 3px; }
+    h1 { font-size: 3.8em; color: #fdeff2; margin-bottom: 3px; }
     h1 .small { font-size: 0.4em; }
     h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #7eaa86; }
-    h3 { text-align: center; color: #7eaa86; }
-    a { color: #7eaa86; }
+    h2 { font-size: 1.5em; color: #fdeff2; }
+    h3 { text-align: center; color: #fdeff2; }
+    a { color: #fdeff2; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
     .download { float: right; }
     pre { background: #000; color: #fff; padding: 15px;}
@@ -46,7 +46,27 @@
       <span class="small">by <a href="https://github.com/dozen">dozen</a></span></h1>
 
     <div class="description">
-      
+      <h2>HOW TO USE</h1>
+      dozens.phpの5行目にユーザ名を、6行目にAPIキーを入力してください。
+      <pre>
+        const ID = 'dozen';
+        const XAUTHKEY = 'cafiojafoiej610353e1bebad8';
+      </pre>
+      APIキーはdozens.jpの<a href="https://dozens.jp/profile" target="_blank">プロフィール画面</a>で確認できます。
+      次に、変更があった時に更新したいドメイン名をtargetlistファイルに入力してください。ゾーン名:ドメイン名というように入力してください。<br>
+      例:
+      <pre>
+        hoge.jp : hoge.jp
+        hoge.jp : www.hoge.jp
+        foo.jp  : foo.jp
+        foo.jp  : www.foo.jp
+      </pre>
+      myipadressファイルにIPアドレスを記録します。Memcachedを使用しない場合このファイルが読み書きできるようにパーミッションを設定してください。ファイルではなくMemcachedを使用したい場合、dozens.phpの8行目の値をtrueにし、9行目、10行目にそれぞれMemcachedのホスト名とポートを入力してください。
+      <pre>
+        const USEMEMCACHED = false;
+        const MEMCACHEDHOST = 'localhost';
+        const MEMCACHEDPORT = 11211;
+      </pre>
     </div>
 
     
