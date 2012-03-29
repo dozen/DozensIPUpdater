@@ -1,3 +1,5 @@
+#!/usr/bin/php
+
 <?php
 
 class Config {
@@ -12,7 +14,7 @@ class Config {
 
   static function targetList() {
     $targetList = array();
-    $file = file('targetlist');
+    $file = file(__DIR__ . 'targetlist');
     foreach ($file as $line) {
       $line = trim($line);
       // //で始まる行はコメントとみなす
@@ -45,7 +47,7 @@ class MyIPAdress {
       }
       return true;
     }
-    $file = file('myipadress');
+    $file = file(__DIR__ . 'myipadress');
     if (trim($file[0]) == $this->ip) {
       return false;
     }
@@ -56,7 +58,7 @@ class MyIPAdress {
     if (Config::USEMEMCACHED) {
       $this->mem->set('dozens_MyIPAdress', $this->ip, 0, 3600);
     } else {
-      $fp = fopen('myipadress', 'w');
+      $fp = fopen(__DIR__ . 'myipadress', 'w');
       fwrite($fp, $this->ip);
       fclose($fp);
     }
