@@ -27,27 +27,27 @@ class Config {
 
 }
 
-class MyIPAdress {
+class MyIPAddress {
 
   function __construct() {
     $this->ip = trim(file_get_contents('http://ifconfig.me/ip'));
   }
 
-  function getMyIPAdress() {
+  function getMyIPAddress() {
     return $this->ip;
   }
 
   //IPアドレスが変動している場合はtrue、そうでない場合はfalseを返す
-  function changedMyIPAdress() {
+  function changedMyIPAddress() {
     if (Config::USEMEMCACHED) {
       $this->mem = new Memcache();
       $this->mem->connect(Config::MEMCACHEDHOST, Config::MEMCACHEDPORT);
-      if ($this->ip == $this->mem->get('dozens_MyIPAdress')) {
+      if ($this->ip == $this->mem->get('dozens_MyIPAddress')) {
         return false;
       }
       return true;
     }
-    $file = file(__DIR__ . 'myipadress');
+    $file = file(__DIR__ . 'myipaddress');
     if (trim($file[0]) == $this->ip) {
       return false;
     }
@@ -56,9 +56,9 @@ class MyIPAdress {
 
   function setChanged() {
     if (Config::USEMEMCACHED) {
-      $this->mem->set('dozens_MyIPAdress', $this->ip, 0, 3600);
+      $this->mem->set('dozens_MyIPAddress', $this->ip, 0, 3600);
     } else {
-      $fp = fopen(__DIR__ . 'myipadress', 'w');
+      $fp = fopen(__DIR__ . 'myipaddress', 'w');
       fwrite($fp, $this->ip);
       fclose($fp);
     }
@@ -173,17 +173,17 @@ class Dozens {
     }
   }
 
-  function setMyIPAdress($ip) {
+  function setMyIPAddress($ip) {
     $this->ip = $ip;
   }
 
 }
 
-$ip = new MyIPAdress();
+$ip = new MyIPAddress();
 //IPアドレスが変動してる時だけAPIにアクセスする
-if ($ip->changedMyIPAdress()) {
+if ($ip->changedMyIPAddress()) {
   $dozens = new Dozens();
-  $dozens->setMyIPAdress($ip->getMyIPAdress());
+  $dozens->setMyIPAddress($ip->getMyIPAddress());
   $updateList = $dozens->getRecordListofTarget(Config::targetList());
   $dozens->updateRecords($updateList);
   $ip->setChanged();
