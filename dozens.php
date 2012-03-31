@@ -62,14 +62,16 @@ class MyIPAddress {
     if (Config::USEMEMCACHED) {
       $this->mem = new Memcache();
       $this->mem->connect(Config::MEMCACHEDHOST, Config::MEMCACHEDPORT);
-      if ($this->ip == $this->mem->get('dozens_MyIPAddress')) {
+      $cachedIPAddress = $this->mem->get('dozens_MyIPAddress');
+      if ($this->ip == $cachedIPAddress && $cachedIPAddress) {
         return false;
       }
       return true;
     }
     if (file_exists(__DIR__ . 'myipaddress')) {
       $file = file(__DIR__ . 'myipaddress');
-      if (trim($file[0]) == $this->ip) {
+      $file = trim($file[0]);
+      if ($file == $this->ip && $file) {
         return false;
       }
     }
