@@ -5,7 +5,7 @@
 class Config {
 
   const ID = 'dozen';
-  const XAUTHKEY = 'cafiojafoiej610353e1bebad8';
+  const APIKEY = 'cafiojafoiej610353e1bebad8';
   //Memcachedを使うか否か
   const USEMEMCACHED = false;
   //Memcachedを使う場合はMemcachedのホストとポートの設定をしてください。
@@ -139,7 +139,7 @@ class Curl {
       $curlOptions += array(
           CURLOPT_HTTPHEADER => array(
               'X-Auth-User: ' . Config::ID,
-              'X-Auth-Key: ' . Config::XAUTHKEY
+              'X-Auth-Key: ' . Config::APIKEY
           )
       );
     } else {
