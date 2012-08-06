@@ -4,12 +4,12 @@ Dozens.jpを動的IPアドレスで利用していてIPアドレスが変動し�
 
 h3. 使い方
 
-dozens.phpの5行目にユーザ名を、6行目にAPIキーを入力してください。APIキーはdozens.jpの "プロフィール画面":https://dozens.jp/profile で確認できます。
+dozens.phpにユーザ名、を入力してください。APIキーはdozens.jpの "プロフィール画面":https://dozens.jp/profile で確認できます。
 
 bq. const ID = 'dozen';
 const APIKEY = 'cafiojafoiej610353e1bebad8';
 
-次に、変更があった時に更新したいドメイン名をtargetlistファイルに入力してください。ゾーン名 :ドメイン名というように入力してください。
+次に、変更があった時に更新したいドメイン名をゾーン名 :ドメイン名というように入力してください。
 
 bq. hoge.jp : hoge.jp
 hoge.jp : www.hoge.jp
@@ -17,7 +17,7 @@ foo.jp  : foo.jp
 foo.jp  : www.foo.jp
 
 myipadressファイルにIPアドレスを保持するため、読み書きができるようにしてください。
-IPアドレスの保持にファイルを使わず、Memcachedを使うこともできます。その場合、dozens.phpの8行目の値をtrueにし、9行目、10行目にそれぞれMemcachedのホスト名とポートを入力してください。
+IPアドレスの保持にファイルを使わず、Memcachedを使うこともできます。その場合、USEMEMCACHEDをtrueにし、Memcachedのホスト名とポートを入力してください。
 
 bq. const USEMEMCACHED = false;
 const MEMCACHEDHOST = 'localhost';
