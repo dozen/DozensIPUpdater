@@ -24,7 +24,7 @@ class Config {
      */
     static function targetList() {
         $targetList = array();
-        $file = file(__DIR__ . 'targetlist');
+        $file = file(__DIR__ . '/targetlist');
         foreach ($file as $line) {
             $line = trim($line);
             // //で始まる行はコメントとみなす
@@ -69,8 +69,8 @@ class MyIPAddress {
             }
             return true;
         }
-        if (file_exists(__DIR__ . 'myipaddress')) {
-            $file = file(__DIR__ . 'myipaddress');
+        if (file_exists(__DIR__ . '/myipaddress')) {
+            $file = file(__DIR__ . '/myipaddress');
             $file = trim($file[0]);
             if ($file == $this->ip && $file) {
                 return false;
@@ -86,7 +86,7 @@ class MyIPAddress {
         if (Config::USEMEMCACHED) {
             $this->mem->set('dozens_MyIPAddress', $this->ip, 0, 3600);
         } else {
-            $fp = fopen(__DIR__ . 'myipaddress', 'w');
+            $fp = fopen(__DIR__ . '/myipaddress', 'w');
             fwrite($fp, $this->ip);
             fclose($fp);
         }
